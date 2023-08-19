@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Chatable',
     description: 'Feeling lonely? Do not worry, i am here to chat with you <3',
-    url: 'https://rahuletto.thedev.id/chatable',
+    url: 'https://chatabl.vercel.app',
     siteName: 'Chatable',
     locale: 'en_US',
     type: 'website',

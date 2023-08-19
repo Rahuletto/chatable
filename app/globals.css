@@ -3,25 +3,205 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --background: #f1f1f1;
+  --chatbox: #d9d9d9;
+  --green: #66dc66;
+
+  --font-color: #0c0c0c;
+  --para-color: #353535;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+* {
+  font-family: var(--root-font);
+}
+
+::-webkit-scrollbar {
+  width: 16px;
+  transition: 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) !important;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-track:hover {
+  background-color: transparent;
+}
+
+/* scrollbar itself */
+::-webkit-scrollbar-thumb {
+  background: var(--para-color);
+  border-radius: 16px;
+  border: 6px solid var(--chatbox);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  border: 5px solid var(--chatbox);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+h1,
+h2,
+p {
+  font-weight: 700;
+}
+
+p {
+  color: var(--para-color);
+  opacity: 0.8;
+  font-size: 16px;
+}
+
+h1 {
+  font-size: 38px;
+}
+
+h2 {
+  font-size: 32px;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: var(--font-color);
+  background: var(--background);
+}
+
+main {
+  gap: 18px;
+  min-height: 100vh;
+  max-height: 100vh;
+  display: grid;
+  grid-template-columns: 0.3fr 1fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  padding: 22px;
+}
+
+.chatbox {
+  display: flex;
+  flex-direction: column-reverse;
+  background: var(--chatbox);
+  height: 100%;
+  border-radius: 22px;
+}
+
+.content {
+  display: flex;
+  gap: 18px;
+  flex-direction: column;
+  padding-left: 16px;
+  padding-right: 12px;
+  padding-top: 24px;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.datasets {
+  padding: 8px 16px;
+  background: var(--chatbox);
+  border-radius: 10px;
+  cursor: grab;
+  user-select: none;
+  font-weight: 800;
+  width: fit-content;
+  margin-top: 12px;
+  transition: 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.datasets:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 0px 69px 100vw #0000004a;
+}
+
+button {
+  cursor: pointer;
+  padding: 12px 24px;
+  background: var(--green);
+  border-radius: 8px;
+  font-size: 20px;
+}
+
+button:disabled {
+  opacity: 0.5;
+  background: #dc6666;
+}
+
+#bubbles {
+  padding-left: 18px;
+  padding-right: 18px;
+  overflow: auto;
+  gap: 10px;
+  max-height: 82vh;
+  padding-top: 16px;
+}
+
+.message {
+  width: -webkit-fill-available
+}
+
+.bot, .user {
+  word-wrap: break-word;
+  padding: 6px 12px;
+  border-radius: 8px;
+  max-width: 400px;
+  width: fit-content;
+}
+
+.bot {
+  background: #bcbcbc;
+  float: left;
+}
+
+.user {
+  float: right;
+  background: var(--green);
+}
+
+.bot p, .user p {
+  color: var(--font-color);
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.links {
+  background: #dbdbdb;
+  border: 1px solid #919191;
+  border-radius: 10px;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-weight: 800;
+  width: fit-content;
+  margin-top: 4px;
+  transition: 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.links:hover {
+  transform: scale(0.95);
+  opacity: 0.8;
+}
+
+#chat-input {
+  font-family: var(--root-font);
+  outline: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  width: -webkit-fill-available;
+  font-size: 18px;
+}
+
+.input {
+  margin: 16px;
+  display: flex;
+  gap: 12px;
 }

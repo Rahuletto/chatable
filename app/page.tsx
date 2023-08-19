@@ -86,9 +86,9 @@ export default function App() {
             </button>
           </div>
           <div id="bubbles" className="flex flex-col-reverse">
-            {session.map((elem) => {
+            {session.map((elem, i) => {
               return (
-                <div className="message">
+                <div className="message" key={i}>
                   <div className={elem.user ? "user" : "bot"}>
                     <p>{elem.message}</p>
                   </div>

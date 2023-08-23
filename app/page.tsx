@@ -1,11 +1,12 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { Suspense, useState, useEffect } from "react";
 import Loading from "./loading";
 
 export default function App() {
   const [input, setInput] = useState("");
   const [session, setSession] = useState([{ user: false, message: "Hello!" }]);
+  const [loading, setLoading] = useState(false);
 
   async function send() {
     const box = document.getElementById("chat-input");
@@ -13,21 +14,26 @@ export default function App() {
     const obj = { user: true, message: input };
     setSession((old) => [obj, ...old]);
     setInput("");
+    setLoading(true);
     (box as HTMLInputElement).disabled = true;
     const r = await fetch(`/fetch?input=${input}`, {
       cache: "no-cache",
     });
     const res: { reply: string; status: number } = await r.json();
-
+    setLoading(false);
     setSession((old) => [{ user: false, message: res.reply }, ...old]);
+
     (box as HTMLInputElement).disabled = false;
     box?.focus();
   }
 
+  useEffect(() => {
+    fetch(`/ping`);
+  }, []);
+
   return (
     <Suspense fallback={<Loading />}>
       <main>
-        
         <div className="left">
           <div className="content">
             <h1>Chatable</h1>
@@ -86,6 +92,16 @@ export default function App() {
             </button>
           </div>
           <div id="bubbles" className="flex flex-col-reverse">
+            {loading ? (
+              <div className="message" key="loading">
+                <div className="bot type">
+                  <span className="typing"></span>
+                  <span className="typing"></span>
+                  <span className="typing"></span>
+                </div>
+              </div>
+            ) : null}
+
             {session.map((elem, i) => {
               return (
                 <div className="message" key={i}>

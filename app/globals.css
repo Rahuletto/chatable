@@ -147,10 +147,11 @@ button:disabled {
 }
 
 .message {
-  width: -webkit-fill-available
+  width: -webkit-fill-available;
 }
 
-.bot, .user {
+.bot,
+.user {
   word-wrap: break-word;
   padding: 6px 12px;
   border-radius: 8px;
@@ -168,7 +169,16 @@ button:disabled {
   background: var(--green);
 }
 
-.bot p, .user p {
+.message:nth-of-type(1) .bot {
+  animation: 0.2s shrink cubic-bezier(.51,.69,.46,.96);
+}
+
+.message:nth-of-type(1) .user {
+  animation: 0.2s shrink cubic-bezier(.51,.69,.46,.96);
+}
+
+.bot p,
+.user p {
   color: var(--font-color);
   font-weight: 700;
   font-size: 18px;
@@ -204,4 +214,47 @@ button:disabled {
   margin: 16px;
   display: flex;
   gap: 12px;
+}
+
+.type {
+  padding: 12px;
+  border-radius: 12px;
+}
+
+span.typing {
+  height: 8px;
+  width: 8px;
+  float: left;
+  margin: 0 1px;
+  background-color: #707070;
+  display: block;
+  border-radius: 50%;
+  opacity: 0.4;
+}
+
+.typing:nth-of-type(1) {
+  animation: 1s blink infinite 0.3333s;
+}
+
+.typing:nth-of-type(2) {
+  animation: 1s blink infinite 0.6666s;
+}
+
+.typing:nth-of-type(3) {
+  animation: 1s blink infinite 0.9999s;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes shrink {
+  0% {
+    transform: scale(0.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

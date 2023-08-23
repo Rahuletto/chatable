@@ -21,7 +21,10 @@ export default function App() {
     });
     const res: { reply: string; status: number } = await r.json();
     setLoading(false);
-    setSession((old) => [{ user: false, message: res.reply }, ...old]);
+    setSession((old) => [
+      { user: false, message: res.reply.replace(/&nbsp;/g,' ') },
+      ...old,
+    ]);
 
     (box as HTMLInputElement).disabled = false;
     box?.focus();
@@ -45,7 +48,7 @@ export default function App() {
             <span className="datasets">12k+ Datasets</span>
           </div>
 
-          <div>
+          <div className="code">
             <p>Source Code</p>
             <div className="flex gap-2">
               <a href="https://github.com/Rahuletto/chatable" className="links">
@@ -105,8 +108,8 @@ export default function App() {
             {session.map((elem, i) => {
               return (
                 <div className="message" key={i}>
-                  <div className={elem.user ? "user" : "bot"}>
-                    <p>{elem.message}</p>
+                  <div id="msg" className={elem.user ? "user" : "bot"}>
+                    <p>{elem.message.replace(/&nbsp;/g,' ')}</p>
                   </div>
                 </div>
               );

@@ -258,3 +258,32 @@ span.typing {
     transform: scale(1);
   }
 }
+
+@media only screen and (max-width: 750px) {
+  main {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    padding-bottom: 26px !important;
+    max-height: inherit;
+    padding: 8px;
+  }
+  .left {
+    gap: 12px;
+  }
+  .chatbox {
+    min-height: 93vh;
+  }
+  .bot, .user {
+    max-width: 69vw;
+  }
+
+  .code {
+    padding-left: 16px;
+    padding-right: 12px;
+  }
+
+  .content {
+    padding-bottom: 16px;
+  }
+}

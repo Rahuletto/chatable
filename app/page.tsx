@@ -22,13 +22,23 @@ export default function App() {
     const res: { reply: string; status: number } = await r.json();
     setLoading(false);
     setSession((old) => [
-      { user: false, message: res.reply.replace(/&nbsp;/g,' ') },
+      { user: false, message: res.reply.replace(/&nbsp;/g, " ") },
       ...old,
     ]);
 
     (box as HTMLInputElement).disabled = false;
     box?.focus();
   }
+
+  useEffect(() => {
+    const elems = document.querySelectorAll("#msg.bot");
+    for (let i = 0; i < elems.length; i++) {
+      const el = elems[i].querySelector("p");
+      var html = el.innerHTML;
+      html = html.replace(/&nbsp;/g, " ");
+      el.innerHTML = html;
+    }
+  }, [session])
 
   useEffect(() => {
     fetch(`/ping`);
@@ -109,7 +119,7 @@ export default function App() {
               return (
                 <div className="message" key={i}>
                   <div id="msg" className={elem.user ? "user" : "bot"}>
-                    <p>{elem.message.replace(/&nbsp;/g,' ')}</p>
+                    <p>{elem.message.replace(/&nbsp;/g, " ")}</p>
                   </div>
                 </div>
               );

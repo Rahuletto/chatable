@@ -275,7 +275,7 @@ span.typing {
     min-height: 93vh;
   }
   .bot, .user {
-    max-width: 69vw;
+    max-width: 72vw;
   }
 
   .code {
